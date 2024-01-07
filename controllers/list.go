@@ -1,5 +1,9 @@
 package controllers
 
+import (
+	"todo_list/models"
+)
+
 type List struct {
 	ActionName string
 	Method     string
@@ -15,21 +19,25 @@ func NewList() *List {
 }
 
 func (l *List) GetActionName() string {
-	//TODO implement me
-	panic("implement me")
+	return l.GetActionName()
 }
 
 func (l *List) GetMethod() string {
-	//TODO implement me
-	panic("implement me")
+	return l.Method
 }
 
 func (l *List) GetHttpMethod() string {
-	//TODO implement me
-	panic("implement me")
+	return l.HttpMethod
 }
 
 func (l *List) Do(args []string) (map[string]any, map[string]any) {
-	//TODO implement me
-	panic("implement me")
+
+	status := 200
+
+	tasks := models.DB.Find([]string{})
+
+	return map[string]any{
+		"status": status,
+		"data":   tasks,
+	}, nil
 }

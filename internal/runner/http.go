@@ -31,7 +31,7 @@ func (h *Http) Run(args []string) {
 	for _, action := range controllers.GetActions() {
 		if _, ok := action.(controllers.BaseAction); ok {
 			// TODO What to do for routes that receive `:id`s ?
-			router.RouterGroup.Handle("/"+action.GetHttpMethod(), action.GetMethod(), func(c *gin.Context) {
+			router.RouterGroup.Handle(action.GetHttpMethod(), "/"+action.GetMethod(), func(c *gin.Context) {
 				result, err := action.Do(args)
 				if err != nil {
 					c.AbortWithStatusJSON(err["status"].(int), err)

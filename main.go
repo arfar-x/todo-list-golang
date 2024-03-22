@@ -3,10 +3,9 @@ package main
 import (
 	"fmt"
 	"os"
+	"todo_list/cmd"
 
 	"github.com/joho/godotenv"
-
-	"todo_list/cmd"
 )
 
 var projectDir, _ = os.Getwd()

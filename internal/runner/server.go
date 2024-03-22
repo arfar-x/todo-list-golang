@@ -1,8 +1,10 @@
 package runner
 
+import "gorm.io/gorm"
+
 type Runner interface {
 	GetName() string
-	Run([]string)
+	Run([]string, gorm.DB)
 }
 
 type Factory struct {

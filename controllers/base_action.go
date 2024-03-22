@@ -1,5 +1,7 @@
 package controllers
 
+import "gorm.io/gorm"
+
 type BaseAction interface {
 	GetActionName() string
 	GetMethod() string
@@ -7,8 +9,8 @@ type BaseAction interface {
 	Do([]string) (map[string]any, map[string]any)
 }
 
-func GetActions() []BaseAction {
-	return []BaseAction{
-		NewList(),
+func GetActions(db gorm.DB) map[string]BaseAction {
+	return map[string]BaseAction{
+		"list": NewList(db),
 	}
 }

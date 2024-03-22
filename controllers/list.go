@@ -1,6 +1,7 @@
 package controllers
 
 import (
+	"gorm.io/gorm"
 	"todo_list/models"
 )
 
@@ -8,13 +9,15 @@ type List struct {
 	ActionName string
 	Method     string
 	HttpMethod string
+	DB         gorm.DB
 }
 
-func NewList() *List {
+func NewList(db gorm.DB) *List {
 	return &List{
 		ActionName: "List",
 		Method:     "list",
 		HttpMethod: "GET",
+		DB:         db,
 	}
 }
 
@@ -34,7 +37,9 @@ func (l *List) Do(args []string) (map[string]any, map[string]any) {
 
 	status := 200
 
-	tasks := models.DB.Find([]string{})
+	var tasks []models.Task
+
+	l.DB.Find(&tasks)
 
 	return map[string]any{
 		"status": status,
